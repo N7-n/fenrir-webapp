@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import './result.css';
+import Block from './components/block/Block'
 
 function Result(){
 
@@ -15,11 +17,13 @@ function Result(){
       <h1 className="pageTitle">検索結果</h1>
       {
         (function () {
-          const list = [];
+          const List = [];
           for (let i = 0; i < stores.length; i++){
-            list.push(<p>{stores[i]["name"]} </p>);
+            List.push(
+              <Block store={stores[i]}/>
+            );
           }
-          return <h1 className="storeTitle">{list}</h1>;
+          return <div className='storeList'>{List}</div>;
         }())
       }
     </div>
