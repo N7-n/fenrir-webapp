@@ -8,8 +8,6 @@ import (
 func Router() {
 	router := gin.Default()
 
-	//router.LoadHTMLGlob("../api/web/*.html")
-	//router.Static("/web","../api/web/")
 	router.Use(cors.Default())
 	
 	router.GET("/", func(ctx *gin.Context){
