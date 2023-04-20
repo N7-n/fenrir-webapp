@@ -14,5 +14,9 @@ func Router() {
 		SearchHandler(ctx)
 	})
 
+	router.GET("/all", func(ctx *gin.Context){
+		GetAllDataHandler(ctx)
+	})
+
 	router.Run()
 }

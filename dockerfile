@@ -1,4 +1,4 @@
-FROM golang:1.17
+FROM golang:1.20.3
 
 ENV TZ Asia/Tokyo
 ENV API_TOKEN c14a9e3458a1cb8d

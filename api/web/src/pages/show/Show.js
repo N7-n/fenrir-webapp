@@ -10,17 +10,19 @@ const Show = () => {
   const id = queries.get("id");
 
   useEffect(() => {
-    fetch('https://localhost:8080?id='+id, {method: 'GET'})
+    fetch('http://localhost:8080/all?id='+id, {method: 'GET'})
     .then(res => res.json())
     .then(data => {
       setStore(data)
     })
   }, [id]);
 
-  console.log(store["a"])
+  console.log(store["result"])
+  console.log(store["access"])
   return (
     <div>
       <p>ああああ</p>
+      <p>{store["result"]}</p>
     </div>
   );
 };
