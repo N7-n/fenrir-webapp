@@ -1,5 +1,25 @@
-version: '3'
+version: '3.8'
 services:
+  dynamodb-local:
+    container_name: dynamodb-local
+    image: "amazon/dynamodb-local:latest"
+    command: "-jar DynamoDBLocal.jar -sharedDb" 
+    ports:
+      - 8000:8000
+
+  dynamodb-admin:
+    container_name: dynamodb-admin
+    image: aaronshaf/dynamodb-admin:latest
+    ports:
+      - 8001:8001
+    environment: 
+    - DYNAMO_ENDPOINT=http://dynamodb-local:8000
+    - AWS_REGION=ap-northeast-1
+    - AWS_ACCESS_KEY_ID=fake
+    - AWS_SECRET_ACCESS_KEY=fake
+    depends_on:
+      - dynamodb-local
+
   backend:
     build: .
     ports:
@@ -8,4 +28,4 @@ services:
   frontend:
     build: ./api/web/.
     ports:
-      - "80:80"
+      - "3000:3000"

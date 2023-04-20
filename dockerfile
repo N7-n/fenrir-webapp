@@ -2,7 +2,7 @@ FROM golang:1.17
 
 ENV TZ Asia/Tokyo
 ENV API_TOKEN c14a9e3458a1cb8d
-
+ENV DYNAMO_ENDPOINT http://dynamodb-local:8000
 
 WORKDIR /app
 

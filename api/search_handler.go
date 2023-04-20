@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 	"github.com/gin-gonic/gin"
-	//"os"
+	"os"
 	"io"
 )
 // type Shop struct {
@@ -45,11 +45,10 @@ import (
 // }
 
 func HotPepperApi(name string, shopRange string, latitude string, longitude string) string{
-	//https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=c14a9e3458a1cb8d&lat=35&lng=139&range=5&format=json
-//http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=c14a9e3458a1cb8d&name="焼き鳥"
+
 	queries := "&name=" + name + "&range=" + shopRange + "&lat=" + latitude + "&lng=" + longitude + "&format=json&count=5&type=lite"
-	//url := "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=" + os.Getenv("API_TOKEN") + queries
-	url := "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=c14a9e3458a1cb8d" + queries
+	url := "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=" + os.Getenv("API_TOKEN") + queries
+	//url := "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=c14a9e3458a1cb8d" + queries
 
 	res, _ := http.Get(url)
 
