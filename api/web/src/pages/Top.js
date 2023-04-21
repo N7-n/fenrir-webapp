@@ -22,8 +22,8 @@ function Top() {
       <input id="name" type="text" name="name"/>
       <label htmlFor="range">範囲</label>
       <input id="range" type="text" name="range"/>
-      <input className="notDisplay" type="number" name="latitude" defaultValue={data1} />
-      <input className="notDisplay" type="number" name="longitude" defaultValue={data2} />
+      <input className="notDisplay" type="number" name="latitude" defaultValue={data1} required/>
+      <input className="notDisplay" type="number" name="longitude" defaultValue={data2} required/>
       <input type="submit" value="Submit" />
     </form>
   );

@@ -16,7 +16,7 @@ function Result(){
   const lng = queries.get('lng')
   const lat = queries.get('lat')
   var start = queries.get('start')
-  if (start != 1){
+  if (start !== 1){
     start = start / 5 + 1;
   }
 

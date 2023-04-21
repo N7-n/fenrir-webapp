@@ -28,5 +28,5 @@ func SearchHandler(ctx *gin.Context) {
 	start := ctx.Request.URL.Query().Get("start")
 
 	query := HotPepperApi(name, shopRange, latitude, longitude, start)
-	http.Redirect(ctx.Writer, ctx.Request, "http://localhost:3000/result?result="+query+"&name="+name+"&range="+shopRange+"&lat="+latitude+"&lng="+longitude, http.StatusFound)
+	http.Redirect(ctx.Writer, ctx.Request, "http://localhost:3000/result?result="+query+"&name="+name+"&range="+shopRange+"&lat="+latitude+"&lng="+longitude+"&start="+start, http.StatusFound)
 }
