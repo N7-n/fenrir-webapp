@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Block from './components/block/Block'
 
 const Show = () => {
   const [store, setStore] = useState([]);
@@ -16,8 +17,8 @@ const Show = () => {
 
   return (
     <div>
-      <p>ああああ</p>
       <p>{store["result"]}</p>
+      <Block store={store["result"]["results"]["shop"][0]}/>
     </div>
   );
 };

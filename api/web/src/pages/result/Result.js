@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useLocation } from 'react-router-dom';
 import './result.css';
 import Block from './components/block/Block'
 
-function Result({name, range, lat, lng}){
-  const [currentPage, setCurrentPage] = useState(1);
-  const [stores, setData] = useState([]); 
-  const navi = useNavigate();
+function Result(){
+  const data = useLocation().search;
+  const queries = new URLSearchParams(data);
+  
+  const storesStr = queries.get("result");
+  const jsonObj = JSON.parse(storesStr);
+  const stores = jsonObj["results"]["shop"];
 
-  const handleButtonClick = () => {
-    setCurrentPage(currentPage + 1);
-    navi.push(`/page/${currentPage + 1}`);
-  };
-
-  useEffect(() => {
-    fetch('http://localhost:8080/?start='+ currentPage*2 + '&name=' + name + '&range=' + range + '&lat=' + lat + '&lng=' + lng)
-    .then(res => res.json())
-    .then(data => {
-      setData(data["results"]["shop"]);
-    })
-  }, [currentPage, name, range, lat, lng]); 
-
-  useEffect(() => {
-    fetch('http://localhost:8080/?start='+ 5 + '&name=' + name + '&range=' + range + '&lat=' + lat + '&lng=' + lng)
-    .then(res => res.json())
-    .then(data => {
-      setData(data["results"]["shop"]);
-    })
-  }, [name, range, lat, lng]);
+  const name = queries.get('name')
+  const range = queries.get('range')
+  const lng = queries.get('lng')
+  const lat = queries.get('lat')
+  var start = queries.get('start')
+  if (start != 1){
+    start = start / 5 + 1;
+  }
 
   return (
     <div>
@@ -40,7 +31,19 @@ function Result({name, range, lat, lng}){
               <Block store={stores[i]}/>
             );
           }
-          return <div className='storeList'>{List}<button onClick={handleButtonClick}>次のページ</button></div>;
+          return (
+            <div>
+              <div className='storeList'>{List}</div>
+              <form action="http://localhost:8080" method="GET">
+                <input className="notDisplay" id="name" type="text" name="name" defaultValue={name}/>
+                <input className="notDisplay" id="range" type="text" name="range" defaultValue={range}/>
+                <input className="notDisplay" type="number" name="latitude" defaultValue={lat} />
+                <input className="notDisplay" type="number" name="longitude" defaultValue={lng} />
+                <input className="notDisplay" type="text" name="start" defaultValue={(start)*5+1}/>
+                <input type="submit" value="次へ" />
+              </form>
+            </div>
+          );
         }())
       }
     </div>
