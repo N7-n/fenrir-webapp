@@ -1,17 +1,34 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import './result.css';
 import Block from './components/block/Block'
 
-function Result(){
+function Result({name, range, lat, lng}){
+  const [currentPage, setCurrentPage] = useState(1);
+  const [stores, setData] = useState([]); 
+  const navi = useNavigate();
 
-  const data = useLocation().search;
-  const queries = new URLSearchParams(data);
-  
-  const storesStr = queries.get("result");
-  const jsonObj = JSON.parse(storesStr);
-  const stores = jsonObj["results"]["shop"];
-  console.log(jsonObj["results"]["shop"]);
+  const handleButtonClick = () => {
+    setCurrentPage(currentPage + 1);
+    navi.push(`/page/${currentPage + 1}`);
+  };
+
+  useEffect(() => {
+    fetch('http://localhost:8080/?start='+ currentPage*2 + '&name=' + name + '&range=' + range + '&lat=' + lat + '&lng=' + lng)
+    .then(res => res.json())
+    .then(data => {
+      setData(data["results"]["shop"]);
+    })
+  }, [currentPage, name, range, lat, lng]); 
+
+  useEffect(() => {
+    fetch('http://localhost:8080/?start='+ 5 + '&name=' + name + '&range=' + range + '&lat=' + lat + '&lng=' + lng)
+    .then(res => res.json())
+    .then(data => {
+      setData(data["results"]["shop"]);
+    })
+  }, [name, range, lat, lng]);
+
   return (
     <div>
       <h1 className="pageTitle">検索結果</h1>
@@ -23,7 +40,7 @@ function Result(){
               <Block store={stores[i]}/>
             );
           }
-          return <div className='storeList'>{List}</div>;
+          return <div className='storeList'>{List}<button onClick={handleButtonClick}>次のページ</button></div>;
         }())
       }
     </div>

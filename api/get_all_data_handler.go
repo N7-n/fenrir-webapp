@@ -28,6 +28,8 @@ func GetAllDataHandler(ctx *gin.Context) {
 
 	_, access, err := dynamodb.GetStore(id)
 
+	log.Print(access)
+
 	if err != nil{
 		dynamodb.SetStore(id, 1)
 		ctx.JSON(200, gin.H{"result":result, "access":1})

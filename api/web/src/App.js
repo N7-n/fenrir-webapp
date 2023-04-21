@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Top />} />
         <Route path='/result' element={<Result />} />
-        <Route path='/show' element={<Show/>} />
+        <Route path='/show/:id' element={<Show />} />
       </Routes>
     </BrowserRouter>
   );
