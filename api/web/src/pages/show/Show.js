@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-//import Block from './components/block/Block'
+import Block from './components/block/Block'
 
-const Show = () => {
-  const [store, setStore] = useState([]);
+function Show(){
+  const [store, setStore] = useState("");
 
   const { id } = useParams();
 
@@ -11,13 +11,24 @@ const Show = () => {
     fetch('http://localhost:8080/all?id='+ id)
     .then(res => res.json())
     .then(data => {
-      setStore(data)
+      setStore(data);
+      console.log((store["result"]));
     })
   }, [id]);
-  console.log(store["result"])
   return (
-    <div>{store["result"]}
-      {/* <Block store={store["result"]["shop"]}/> */}
+    <div>
+      {
+        (function () {
+          const shop = store["result"];
+
+          return (
+            <div>
+              {/* <Block store={shop}/> */}
+              <p>{shop}</p>
+            </div>
+          );
+        }())
+      }
     </div>
   );
 };
