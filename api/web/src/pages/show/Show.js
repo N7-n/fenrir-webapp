@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Block from './components/block/Block'
+//import Block from './components/block/Block'
 
 function Show(){
   const [store, setStore] = useState("");
