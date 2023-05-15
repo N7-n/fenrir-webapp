@@ -18,6 +18,7 @@ function Top() {
 
   return (
     <form action="http://localhost:8080" method="GET">
+      <h1>aaaa</h1>
       <label htmlFor="name">店名</label>
       <input id="name" type="text" name="name"/>
       <label htmlFor="range">範囲</label>
